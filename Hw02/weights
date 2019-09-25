@@ -1,0 +1,3 @@
+function B = weights(C):
+    R = response()
+end

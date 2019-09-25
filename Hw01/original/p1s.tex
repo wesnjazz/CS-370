@@ -1,0 +1,205 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{datetime}
+\usepackage{natbib}      % http://merkel.zoneo.net/Latex/natbib.php
+\usepackage{palatino}
+\usepackage{verbatim}
+\usepackage[normalem]{ulem}
+\bibpunct{(}{)}{;}{a}{,}{,}
+
+\usepackage{array}
+
+\usepackage{chngpage}
+\usepackage{stmaryrd}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{lscape}
+\usepackage{subfigure}
+\usepackage[usenames,dvipsnames]{color}
+\definecolor{myblue}{rgb}{0,0.1,0.6}
+\definecolor{mygreen}{rgb}{0,0.3,0.1}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=mygreen,urlcolor=myblue]{hyperref}
+
+\newcommand{\bocomment}[1]{\textcolor{Bittersweet}{BO says: #1}}
+
+\newcommand{\ignore}[1]{}
+\newcommand{\transpose}{^\mathsf{T}}
+\newcommand{\inner}[1]{\langle #1 \rangle} 
+\newcommand{\smallsec}[1]{\noindent \textbf{#1\ }}
+\newcommand{\cmd}[1] {{\color{blue}\texttt{#1}}}
+
+\newcommand{\solution}[1]{{\color{myblue} \emph{[Solution:} 
+
+#1 
+
+\emph{End solution]}}}
+\newcommand{\solutionnote}[1]{{\color{myblue} \emph{[Note:}
+
+#1 
+
+\emph{End note]}}}
+\newcommand{\points}[1]{{\color{mygreen}\emph{[#1]\ \ }}}
+
+\newcommand{\aone}{\diamondsuit}
+\newcommand{\atwo}{\heartsuit}
+\newcommand{\bone}{\triangle}
+\newcommand{\btwo}{\Box}
+\newcommand{\myand}{\ \land\ }
+\newcommand{\myor}{\ \lor\ }
+\newcommand{\mynot}{\lnot}
+
+\title{
+  Homework 1 solution template\\
+  \Large{CMPSCI 370 Spring 2019, UMass Amherst} \\
+  \Large{Name: Subhransu Maji} \\
+}
+
+
+\settimeformat{ampmtime}
+\date{}
+\begin{document}
+\maketitle
+
+\renewcommand\thesubsection{\thesection.\alph{subsection}}
+
+Here is a template that your solutions should roughly follow. Include outputs as figures, and code should be included in the end.
+
+\section{Matrix manipulation}
+\begin{enumerate}
+\item Create a $m \times n$ array of all zeros.
+\vspace{1in}
+\item Create a random $m \times n$ array.
+\vspace{1in}
+\item Code to compute its length (or norm).
+\vspace{1in}
+
+\item  Given variables $u$ and $v$ representing arrays of size $n \times 1$, write down code to compute their
+\begin{enumerate}
+\item dot product
+\vspace{1in}
+\item angle
+\vspace{1in}
+\item distance
+\vspace{1in}
+\end{enumerate}
+\item Given an array $a \in \mathbb{R}^{m\times n}$ write code to reshape it to a vector of size $nm \times 1$.
+\vspace{1in}
+\end{enumerate}
+
+
+\section{Image formation}
+
+\begin{enumerate}
+\item Illustration of the object and the image formed in the pinhole camera. 
+\vspace{2in}
+\item Calculations for the size of the object.
+\vspace{1in}
+\item Calculations for the distance.
+\vspace{1in}
+\item Time taken for the camera with a lens.
+\vspace{1in}
+\end{enumerate}
+
+\newpage
+\section{Aligning Prokudin-Gorskii images} 
+\begin{enumerate}
+\item Outputs of \cmd{evalAlignment} on the toy images.
+\item Output of \cmd{alignChannels.m} that shows the computed shifts as seen below.
+
+\begin{verbatim}
+>> alignProkudin
+ 1 00125v.jpg shift: G ( 0, 0) B ( 0, 0)
+ 2 00153v.jpg shift: G ( 0, 0) B ( 0, 0)
+ 3 00398v.jpg shift: G ( 0, 0) B ( 0, 0)
+ 4 00149v.jpg shift: G ( 0, 0) B ( 0, 0)
+ 5 00351v.jpg shift: G ( 0, 0) B ( 0, 0)
+ 6 01112v.jpg shift: G ( 0, 0) B ( 0, 0)
+\end{verbatim}
+
+\item A figure that shows all the aligned color images. Only include the images from the Prokudin-Gorskii dataset in the original resolution. For example, do not take low-resolution screenshots of the outputs; Instead save them using appropriate commands in Matlab and Python.
+
+\begin{figure}[h]
+\begin{tabular}{ccc}
+\includegraphics[width=0.32\linewidth]{../output/prokudin-gorskii/00125-aligned.jpg} & 
+\includegraphics[width=0.32\linewidth]{../output/prokudin-gorskii/00149-aligned.jpg} & 
+\includegraphics[width=0.32\linewidth]{../output/prokudin-gorskii/00153-aligned.jpg} \\
+\includegraphics[width=0.32\linewidth]{../output/prokudin-gorskii/00351-aligned.jpg} & 
+\includegraphics[width=0.32\linewidth]{../output/prokudin-gorskii/00398-aligned.jpg} & 
+\includegraphics[width=0.32\linewidth]{../output/prokudin-gorskii/01112-aligned.jpg} \\
+\end{tabular}
+\caption{\label{fig:aligned} Aligned color images.}
+\end{figure}
+\end{enumerate}
+
+\newpage
+\section{Color image demosaicing}
+\begin{enumerate}
+\item Errors of the nearest neighbor interpolation algorithm. 
+
+\begin{verbatim}
+>> evalDemosaicing
+--------------------------------------------
+# 	 image             baseline   	nn
+--------------------------------------------
+1 	 balloon.jpeg      0.179239 	 0.179239 
+2 	 cat.jpg           0.099966 	 0.099966 
+3 	 ip.jpg            0.231587 	 0.231587 
+4 	 puppy.jpg         0.094093 	 0.013670 
+5 	 pencils.jpg       0.181449 	 0.181449 
+6 	 candy.jpeg        0.206359 	 0.206359 
+7 	 house.png         0.117667 	 0.117667 
+8 	 light.png         0.097868 	 0.097868 
+9 	 sails.png         0.074946 	 0.074946 
+10 	 tree.jpeg        0.167812 	 0.167812 
+--------------------------------------------
+ 	 average            0.139150 	 0.139150
+--------------------------------------------
+\end{verbatim}
+
+\item A figure (e.g., Figure~\ref{fig:demosaic-output}) that shows the images obtained after interpolation.
+
+\begin{figure}[h!]
+\begin{tabular}{cccc}
+\includegraphics[width=0.225\linewidth]{../output/demosaic/balloon-nn-dmsc.jpg} & 
+\includegraphics[width=0.225\linewidth]{../output/demosaic/pencil-nn-dmsc.jpg} & 
+\includegraphics[width=0.225\linewidth]{../output/demosaic/ca-nn-dmsc.jpg} & 
+\includegraphics[width=0.225\linewidth]{../output/demosaic/i-nn-dmsc.jpg} \\
+\includegraphics[width=0.225\linewidth]{../output/demosaic/ligh-nn-dmsc.jpg} & 
+\includegraphics[width=0.225\linewidth]{../output/demosaic/squirre-nn-dmsc.jpg} & 
+\includegraphics[width=0.225\linewidth]{../output/demosaic/hous-nn-dmsc.jpg} &
+\includegraphics[width=0.225\linewidth]{../output/demosaic/sail-nn-dmsc.jpg} \\
+\includegraphics[width=0.225\linewidth]{../output/demosaic/pupp-nn-dmsc.jpg} & 
+\includegraphics[width=0.225\linewidth]{../output/demosaic/tree-nn-dmsc.jpg} \\
+\end{tabular}
+\caption{\label{fig:demosaic-output} Demosaiced images using nearest neighbor interpolation.}
+\end{figure}
+
+\item The three plots for the \cmd{puppy.jpg} image.
+\begin{figure}[h!]
+\begin{tabular}{cccc}
+\includegraphics[width=0.33\textwidth]{plot_red.jpg} & 
+\includegraphics[width=0.33\textwidth]{plot_green.jpg} & 
+\includegraphics[width=0.33\textwidth]{plot_blue.jpg} \\
+(a) red & (b) green & (c) blue
+\end{tabular}
+
+\caption{\label{fig:plot} The value of pixels against the values of their neighbor.}
+\end{figure}
+\end{enumerate}
+
+\section{Solution code}
+Include the source code for your solutions as seen below (only the files you implemented are necessary). 
+In latex the command \cmd{verbatiminput\{alignChannels.m\}} allows you to include the code verbatim as seen below. 
+Regardless of how you do this the main requirement is that the included code is readable (use proper formatting, variable names, etc.)
+A screenshot of your code works too provided you include a link to source files.
+
+
+
+\subsubsection{alignChannels.m}
+\verbatiminput{../initial/alignChannels.m}
+\subsubsection{mosaicImage.m}
+\verbatiminput{../initial/mosaicImage.m}
+\subsubsection{demosaicImage.m}
+\verbatiminput{../initial/demosaicImage.m}
+\end{document}

@@ -1,0 +1,61 @@
+function im = mergeImages_affine(im1, im2, transf)
+% This code is part of:
+%
+%   CMPSCI 370: Computer Vision, Spring 2018
+%   University of Massachusetts, Amherst
+%   Instructor: Subhransu Maji
+%
+%   Homework 4
+
+Gim1 = im1;
+Gim2 = im2;
+% Convert color to grayscale
+if size(Gim1, 3) > 1 
+    Gim1 = rgb2gray(Gim1);
+end
+if size(Gim2, 3) > 1
+    Gim2 = rgb2gray(Gim2);
+end
+
+% Create bigger canvas to merge two images
+xmin = 1;
+xmax = uint16(size(im1, 2)*2.5);
+ymin = 1;
+ymax = uint16(size(im1, 1)*2.5);
+canvas = zeros(ymax, xmax, size(im1,3), 'uint8');
+%ox = max(0, -xmin+1);
+%oy = max(0, -ymin+1);
+
+[h1, w1, ~] = size(Gim1);
+[h2, w2, ~] = size(im2);
+
+im(oy+(1:h1), ox+(1:w1),:) = Gim1;
+
+transf;
+affine_M = transf(1:2, 1:2);
+% affine_M = inv(affine_M);
+translate_M = round(transf(3, :));
+% Put im1 into the canvas
+canvas(1:size(im1, 1), 1:size(im1,2), :) = im1;
+
+
+for i=1:size(im2, 1)
+    for j=1:size(im2, 2)
+        T_points = affine_M * [i; j] + translate_M;
+        xp = uint8(round(T_points(1))) + 1;
+        yp = uint8(round(T_points(2))) + 1;
+        canvas(xp, yp, :) = im2(i, j, :);
+        
+        
+%         if xp>0 && xp<=size(im2, 1) && yp>0 && yp<=size(im2,2)
+%             i;
+%             j
+%             canvas(i, j) = im2(yp, xp);
+%         end
+        
+    end
+end
+
+im = canvas;
+% figure
+% imshow(canvas)

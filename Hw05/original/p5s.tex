@@ -1,0 +1,162 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{datetime}
+\usepackage{natbib}      % http://merkel.zoneo.net/Latex/natbib.php
+\usepackage{palatino}
+\usepackage{verbatim}
+\usepackage[normalem]{ulem}
+\bibpunct{(}{)}{;}{a}{,}{,}
+\usepackage[draft]{graphicx}
+
+\usepackage{enumitem}
+\usepackage{array}
+
+\usepackage{chngpage}
+\usepackage{stmaryrd}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{lscape}
+\usepackage{subfigure}
+\usepackage[usenames,dvipsnames]{color}
+\definecolor{myblue}{rgb}{0,0.1,0.6}
+\definecolor{mygreen}{rgb}{0,0.3,0.1}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=mygreen,urlcolor=myblue]{hyperref}
+
+\newcommand{\bocomment}[1]{\textcolor{Bittersweet}{BO says: #1}}
+
+\newcommand{\ignore}[1]{}
+\newcommand{\transpose}{^\mathsf{T}}
+\newcommand{\inner}[1]{\langle #1 \rangle} 
+\newcommand{\smallsec}[1]{\noindent \textbf{#1\ }}
+\newcommand{\cmd}[1] {{\color{blue}\texttt{#1}}}
+
+\newcommand{\solution}[1]{{\color{myblue} \emph{[Solution:} 
+
+#1 
+
+\emph{End solution]}}}
+\newcommand{\solutionnote}[1]{{\color{myblue} \emph{[Note:}
+
+#1 
+
+\emph{End note]}}}
+\newcommand{\points}[1]{{\color{mygreen}\emph{[#1]\ \ }}}
+
+\newcommand{\aone}{\diamondsuit}
+\newcommand{\atwo}{\heartsuit}
+\newcommand{\bone}{\triangle}
+\newcommand{\btwo}{\Box}
+\newcommand{\myand}{\ \land\ }
+\newcommand{\myor}{\ \lor\ }
+\newcommand{\mynot}{\lnot}
+
+\title{
+  Homework 5 solution template\\
+  \Large{CMPSCI 370 Spring 2019, UMass Amherst} \\
+  \Large{Name: Subhransu Maji} \\
+}
+
+
+\settimeformat{ampmtime}
+\date{}
+\begin{document}
+\maketitle
+
+\renewcommand\thesubsection{\thesection.\alph{subsection}}
+
+Here is a template that your solutions should roughly follow. Include outputs as figures, and code should be included in the end.
+
+
+\section{Decision trees}
+\begin{enumerate}
+\item Empty decision tree. 
+ 
+\begin{itemize}
+\item accuracy on training set: \underline{\hspace{2cm}}
+\item accuracy on test set: \underline{\hspace{2cm}}
+\item explain your answer:
+\end{itemize}
+\vspace{1.in}
+
+\item Decision tree of depth 1
+\begin{enumerate}
+\item The coordinate of pixel with the highest accuracy: $(x, y)=$\underline{\hspace{2cm}}. Figure~\ref{fig:viz} visualizes the scores.
+\begin{figure}[h]
+\centering
+\includegraphics[draft, width=0.4\linewidth]{../code/score.jpg}
+%comment the previous line and uncomment the next line to show your figure
+%\includegraphics[width=0.4\textwidth]{../code/score.jpg}
+\caption{\label{fig:viz}Visualizing scores}
+\end{figure}
+\item Write down the decision tree that obtains the best classification
+\vspace{2in}
+\item Accuracy of decision tree with depth 1 on test set: \underline{\hspace{2cm}}
+\vspace{0.3in}
+\end{enumerate}
+
+\item Decision tree of depth 2.
+\begin{enumerate}
+\item Write down the decision tree in if-then-else statement
+\vspace{4in}
+\item Accuracy of decision tree with depth 2 on test set: \underline{\hspace{2cm}}
+\end{enumerate}
+
+\end{enumerate}
+\newpage
+
+\section{Linear classifier}
+\begin{itemize}
+\item Accuracy of linear classifier on test set: \underline{\hspace{2cm}}
+\item Figure ~\ref{fig:weights} visualizes positive and negative parts of weights.
+\begin{figure}[h]
+\centering
+\begin{tabular}{cc}
+\includegraphics[draft, width=0.4\linewidth]{../code/positive_weights.jpg} &
+\includegraphics[draft, width=0.4\linewidth]{../code/negative_weights.jpg} \\
+%comment the previous two lines and uncomment the next two lines to show your figure
+%\includegraphics[width=0.4\linewidth]{../code/positive_weights.jpg} &
+%\includegraphics[width=0.4\linewidth]{../code/negative_weights.jpg} \\
+(a) positive weights & (b) negative weights
+\end{tabular}
+\caption{\label{fig:weights}Visualizing weights}
+\end{figure}
+\end{itemize}
+
+\section{Nearest neighbor classifier}
+Figure~\ref{fig:knn} plots the test accuracy against the number of $k$ for k nearest-neighbor classifier
+
+\begin{figure}[h]
+\centering
+\includegraphics[draft, width=0.4\linewidth]{../code/knn.jpg}
+%comment the previous line and uncomment the next line to show your figure
+%\includegraphics[width=0.4\textwidth]{../code/knn.jpg}
+\caption{\label{fig:knn}Accuracy of k-nearest-neighbor classifier}
+\end{figure}
+
+\section{Bag-of-visual-words representations}
+\begin{enumerate}
+\item Visualize the dictionary
+\begin{figure}[h]
+\centering
+\includegraphics[draft, width=0.5\linewidth]{dictionary.pdf}
+\end{figure}
+\item \textbf{Extra credit}: test accuracy: \underline{\hspace{2cm}}
+\end{enumerate}
+\section{Solution code}
+Include the source code for your solutions as seen below (only the files you implemented are necessary). 
+In latex the command \cmd{verbatiminput\{alignChannels.m\}} allows you to include the code verbatim as seen below. 
+Regardless of how you do this the main requirement is that the included code is readable (use proper formatting, variable names, etc.)
+A screenshot of your code works to provided you include a link to source files.
+
+
+
+\subsection{scoreFeatures.m}
+\verbatiminput{../code/scoreFeatures}
+\subsection{code training a decision tree}
+\subsection{code evaluate a decision tree on test set}
+\subsection{code for training and evaluating the linear model}
+\subsection{code for k-nearest neighbor classification}
+\subsection{constructDictionary.m}
+\subsection{encodeImage.m}
+\end{document}
